@@ -2,6 +2,7 @@
 # VERSION: 3.0
 SETUVAR EDITOR:nvim
 SETUVAR --path PATH:/home/abetemps/\x2elocal/kitty\x2eapp/bin\x1e/home/abetemps/\x2ecargo/bin\x1e/usr/local/cargo/bin\x1e/usr/local/sbin\x1e/usr/local/bin\x1e/usr/sbin\x1e/usr/bin\x1e/sbin\x1e/bin\x1e/usr/games\x1e/usr/local/games\x1e/snap/bin\x1e/home/abetemps/\x2edotnet/tools\x1e/home/abetemps/\x2elocal/nvim\x2eapp/bin
+SETUVAR --export SHELL:fish
 SETUVAR VISUAL:nvim
 SETUVAR __fish_initialized:3100
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
