@@ -1,0 +1,6 @@
+{
+	"include":[
+		"$HOME/.config/waybar/modules/window.json",
+		"$HOME/.config/waybar/modules/workspaces.json"
+	]
+}
