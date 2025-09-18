@@ -6,8 +6,7 @@ include shortcuts.conf
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
 #: characters.
-
-font_family      Fira Code
+# font_family      FiraCode
 # bold_font        auto
 # italic_font      auto
 # bold_italic_font auto
@@ -2795,7 +2794,7 @@ include current-theme.conf
 
 
 # BEGIN_KITTY_FONTS
-font_family      family='Fira Code' variable_name=FiraCodeRoman style=FiraCodeRoman-Regular
+font_family      family='Fira Code' postscript_name=FiraCode-Regular
 bold_font        auto
 italic_font      auto
 bold_italic_font auto

@@ -3,7 +3,7 @@ alias n="nvim"
 
 #=========== CODE
 alias comp="cc -Wall -Werror -Wextra"
-alias vlg="valgrind --leak-check=full --trace-children=yes --track-fds=yes"
+alias vlg="valgrind --show-leak-kinds=all --leak-check=full --trace-children=yes --track-fds=yes"
 alias vlgp="vlg --log-socket=127.0.0.1:5454"
 
 #=========== GIT
