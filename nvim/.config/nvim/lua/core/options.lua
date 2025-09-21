@@ -11,6 +11,7 @@ opt.cursorline = true
 
 -- Columns
 opt.signcolumn = "no"
+opt.wrap = false
 
 -- Tabs & Indents
 opt.tabstop = 4
