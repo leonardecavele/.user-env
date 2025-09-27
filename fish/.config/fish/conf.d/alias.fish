@@ -16,6 +16,7 @@ alias gb="git branch"
 alias gcl="git clone"
 alias grs="git restore"
 alias grss="git restore --staged"
+alias gl="git pull"
 
 #=========== SCRIPTS
 alias cmt="$HOME/.config/scripts/commit_maker.sh"
