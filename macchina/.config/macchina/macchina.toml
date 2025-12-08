@@ -18,7 +18,7 @@ current_shell = true
 physical_cores = false
 
 # Disks to show disk usage for. Defaults to `["/"]`.
-disks = ["/home/abetemps"]
+disks = ["/home/ldecavel"]
 
 # Show percentage next to disk information
 #disk_space_percentage = false
@@ -27,7 +27,7 @@ disks = ["/home/abetemps"]
 #memory_percentage = false
 
 # Themes need to be placed in "$XDG_CONFIG_DIR/macchina/themes" beforehand.
-theme = "abe"
+theme = "default"
 show = ["Host", "Machine", "Kernel", "Distribution",  "Processor","ProcessorLoad", "Memory", "DiskSpace", "Terminal", "Shell"]
 
 
