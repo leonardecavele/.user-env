@@ -6,4 +6,4 @@ visible=true
 
 [custom_ascii]
 color = "green"
-path = "ascii-art.txt"
+path = "~/.config/macchina/themes/ascii-art.txt"
