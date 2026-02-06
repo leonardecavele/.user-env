@@ -1,3 +1,28 @@
+# only for interactive shells
+case "$-" in
+  *i*) ;;
+  *) return ;;
+esac
+
+# make sure junest is discoverable early (without changing priority)
+export PATH="$PATH:$HOME/.local/share/junest/bin"
+
+# auto-enter junest when host lacks sudo/pacman
+if [ -z "${IN_JUNEST:-}" ]; then
+  if ! (/usr/bin/sudo -n true >/dev/null 2>&1 && command -v pacman >/dev/null 2>&1); then
+    if command -v junest >/dev/null 2>&1; then
+      export IN_JUNEST=1
+      exec junest -n /usr/bin/bash -i
+    fi
+  fi
+fi
+
+# put junest wrappers first only when actually in junest
+if [[ "$(command -v pacman 2>/dev/null)" == "$HOME/.junest/"* ]]; then
+  export PATH="$HOME/.junest/usr/bin_wrappers:$PATH"
+  export PATH="$HOME/.local/share/junest/bin:$PATH"
+fi
+
 # colors
 RESET="\[\033[00m\]"
 BLUE="\[\033[01;34m\]"
@@ -42,9 +67,6 @@ unset color_prompt force_color_prompt
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -66,17 +88,17 @@ fi
 
 alias func='grep -rE "[a-z_]+\([a-z_0-9,\* ]*\)"'
 
-
 # NVM https://github.com/nvm-sh/nvm.git
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# PATH
-# JUNEST https://github.com/fsquillace/junest
-export PATH="$PATH:~/.junest/usr/bin_wrappers"
-export PATH=~/.local/share/junest/bin:$PATH
-# CARGO 
+# CARGO
 export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
 
-macchina --config ~/.config/macchina/macchina.toml
+if [[ -z "${MACHINE_ALREADY_SHOWN:-}" ]]; then
+  export MACHINE_ALREADY_SHOWN=1
+  macchina --config ~/.config/macchina/macchina.toml
+fi
+
+cd ~/
