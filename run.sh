@@ -20,6 +20,7 @@ if [ "${1-}" = "-d" ] || [ "${1-}" = "-ds" ]; then
 	exit 1
   fi
   rm -rf -- "$JUNEST_REPOSITORY" "$HOME/.junest"
+  log_info "junest successfully uninstalled"
   [ "${1-}" = "-ds" ] && exit 0
 fi
 
