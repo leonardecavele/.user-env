@@ -15,7 +15,7 @@ fi
 
 # enter junest if not in junest
 if ! in_junest && junest_installed; then
-  exec $JUNEST -n /usr/bin/bash -i
+  exec "$JUNEST" -n /usr/bin/bash -i
 fi
 
 # if not in junest, set-up junest alias
@@ -76,9 +76,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-if [[ -z "${MACCHINA_SHOWN:-1}" ]]; then
+
+
+# macchina
+tty_id="$(tty 2>/dev/null || echo notty)"
+guard_directory="${XDG_RUNTIME_DIR:-/tmp}"
+
+guard="$guard_directory/macchina.$(echo "$tty_id" | tr '/:' '__')"
+if [ ! -e "$guard" ]; then
+  : > "$guard"
   macchina --config ~/.config/macchina/macchina.toml
-  export MACCHINA_SHOWN=1
 fi
 
+# go to home
 cd ~/
