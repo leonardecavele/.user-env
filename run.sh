@@ -34,8 +34,8 @@ if have_sudo_pacman; then
   bash "$ROOT_DIR/scripts/install_env.sh"
 else
   echo "sudo and/or pacman not available -> installing junest, then env"
-  bash "$ROOT_DIR/scripts/install_junest.sh"
-  bash "$ROOT_DIR/scripts/install_env.sh"
+  bash "$ROOT_DIR/scripts/junest.sh"
+  bash "$ROOT_DIR/scripts/config.sh"
   ensure_bashrc_autojunest
   echo "[info] open a new terminal (or: source ~/.bashrc) to auto-enter junest"
 fi

@@ -4,23 +4,52 @@ case "$-" in
   *) return ;;
 esac
 
-# make sure junest is discoverable early (without changing priority)
-export PATH="$PATH:$HOME/.local/share/junest/bin"
+HOST_HOME="$HOME"
+JUNEST_BIN_DIR="$HOST_HOME/.local/share/junest/bin"
+JUNEST_WRAPPERS="$HOST_HOME/.junest/usr/bin_wrappers"
 
-# auto-enter junest when host lacks sudo/pacman
-if [ -z "${IN_JUNEST:-}" ]; then
-  if ! (/usr/bin/sudo -n true >/dev/null 2>&1 && command -v pacman >/dev/null 2>&1); then
-    if command -v junest >/dev/null 2>&1; then
-      export IN_JUNEST=1
-      exec junest -n /usr/bin/bash -i
-    fi
-  fi
+# make junest discoverable early (without changing priority too much)
+if [ -d "$JUNEST_BIN_DIR" ]; then
+  export PATH="$PATH:$JUNEST_BIN_DIR"
 fi
 
-# put junest wrappers first only when actually in junest
-if [[ "$(command -v pacman 2>/dev/null)" == "$HOME/.junest/"* ]]; then
-  export PATH="$HOME/.junest/usr/bin_wrappers:$PATH"
-  export PATH="$HOME/.local/share/junest/bin:$PATH"
+# detect if we're already inside junest (reliable)
+IN_JUNEST_SHELL=0
+PACMAN_PATH="$(command -v pacman 2>/dev/null || true)"
+
+if [ -n "${JUNEST_HOME:-}" ] || [ -n "${JUNEST_ROOT:-}" ]; then
+  IN_JUNEST_SHELL=1
+elif [ -n "$PACMAN_PATH" ] && [ -n "$JUNEST_WRAPPERS" ]; then
+  case "$PACMAN_PATH" in
+    "$JUNEST_WRAPPERS"/*) IN_JUNEST_SHELL=1 ;;
+  esac
+fi
+
+# if in junest, put wrappers first (so nvim inherits correct PATH)
+if [ "$IN_JUNEST_SHELL" -eq 1 ]; then
+  export PATH="$JUNEST_WRAPPERS:$JUNEST_BIN_DIR:$PATH"
+  hash -r
+fi
+
+# auto-enter junest when host lacks sudo/pacman
+# do it only if NOT already inside junest
+if [ "$IN_JUNEST_SHELL" -eq 0 ] && [ -z "${IN_JUNEST:-}" ]; then
+  if ! (/usr/bin/sudo -n true >/dev/null 2>&1 && command -v pacman >/dev/null 2>&1); then
+    if command -v junest >/dev/null 2>&1; then
+      if [ -x "$HOME/.junest/usr/bin/bash" ] || [ -d "$HOME/.junest/usr/bin" ]; then
+        # IMPORTANT: set IN_JUNEST inside the exec'ed bash too (junest may sanitize env)
+        if [ -x /usr/bin/bash ]; then
+          exec junest -n env IN_JUNEST=1 /usr/bin/bash -i
+        elif [ -x /bin/bash ]; then
+          exec junest -n env IN_JUNEST=1 /bin/bash -i
+        else
+          exec junest -n env IN_JUNEST=1 sh -i
+        fi
+      else
+        echo "[junest] image not installed: run 'junest setup' once"
+      fi
+    fi
+  fi
 fi
 
 # colors

@@ -14,6 +14,10 @@ fi
 export PATH="$JUNEST_REPO_DIR/bin:$PATH"
 junest setup
 
+uid="$(id -u)"
+grep -qE "^[^:]+:x:${uid}:" "$JUNEST_HOME/etc/passwd" || \
+echo "leona:x:${uid}:${uid}:Leona:/home/leona:/bin/bash" >> "$JUNEST_HOME/etc/passwd"
+
 # DNS
 cp /etc/resolv.conf "$JUNEST_HOME/etc/resolv.conf"
 chmod 644 "$JUNEST_HOME/etc/resolv.conf"

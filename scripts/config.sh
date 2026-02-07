@@ -9,16 +9,20 @@ JUNEST_BIN="$JUNEST_REPO_DIR/bin/junest"
 
 # package list
 pkgs=(
-  kitty
   neovim
+  base-devel
   macchina
   which
   tree
+  tree-sitter-cli
   openssh
   nodejs
   npm
   curl
   git
+  tar
+  gzip
+  wget
 )
 
 # detect mode + set runner
