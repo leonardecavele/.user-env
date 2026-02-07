@@ -3,6 +3,9 @@
 # strict with errors
 set -euo pipefail
 
+# get library
+source "$SCRIPT_DIRECTORY/scripts/lib.sh"
+
 # pacman package list
 pkgs=(
   neovim
@@ -28,41 +31,43 @@ npms=(
 
 # detect mode to set runner
 if /usr/bin/sudo -n true >/dev/null 2>&1 && command -v pacman >/dev/null 2>&1; then
-  echo "[INFO] ${GREEN}mode: host${RESET}"
+  MODE="DIRECT"
   RUN=()
 else
-  echo "[INFO] ${GREEN}mode: junest${RESET}"
+  MODE="JUNEST"
   if [ ! -x "$JUNEST" ]; then
-    echo "[ERROR] ${RED}junest not found at: $JUNEST${RESET}"
+    log_error "junest not found at: $JUNEST"
     exit 1
   fi
   RUN=("$JUNEST" -n)
 fi
 
 # update + install pkgs
+log_info "(${MODE}) updating or installing pacman packages"
 "${RUN[@]}" sudo pacman -Syu --noconfirm
 "${RUN[@]}" sudo pacman -S --noconfirm --needed "${pkgs[@]}"
+log_info "(${MODE}) done updating or installing pacman packages"
 
 # update + install npms trying without sudo first
+log_info "(${MODE}) updating or installing npm packages"
 if ! "${RUN[@]}" npm i -g --no-fund --no-audit "${npms[@]}"; then
   "${RUN[@]}" sudo npm i -g --no-fund --no-audit "${npms[@]}"
 fi
+log_info "(${MODE}) done updating or installing npm packages"
 
 # link config to home
 mkdir -p "$HOME/.config"
-ln -svf "$SCRIPT_DIRECTORY/kitty" "$HOME/.config/" || true
-ln -svf "$SCRIPT_DIRECTORY/nvim" "$HOME/.config/" || true
-ln -svf "$SCRIPT_DIRECTORY/macchina" "$HOME/.config/" || true
-ln -svf "$SCRIPT_DIRECTORY/.bashrc" "$HOME/.bashrc" || true
+ln -svf "$SCRIPT_DIRECTORY/config/kitty" "$HOME/.config/" || true
+ln -svf "$SCRIPT_DIRECTORY/config/nvim" "$HOME/.config/" || true
+ln -svf "$SCRIPT_DIRECTORY/config/macchina" "$HOME/.config/" || true
+ln -svf "$SCRIPT_DIRECTORY/config/.bashrc" "$HOME/.bashrc" || true
 
 # vim-plug to home
+log_info "(${MODE}) installing vim plug"
 data_home="${XDG_DATA_HOME:-$HOME/.local/share}"
 plug_path="$data_home/nvim/site/autoload/plug.vim"
 if [ ! -f "$plug_path" ]; then
   curl -sfLo "$plug_path" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim >/dev/null
 fi
-
-echo ""
-echo "[INFO] ${GREEN}done${RESET}"
-echo "[info] ${YELLOW}open nvim and run :PlugInstall${RESET}"
+log_info "(${MODE}) done installing vim plug: open neovim and run ':PlugInstall'"
