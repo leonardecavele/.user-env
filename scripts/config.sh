@@ -11,7 +11,7 @@ source "$SCRIPT_DIRECTORY/scripts/utils.sh"
 pkgs=(
   neovim
   less
-  base_devel
+  base-devel
   man-pages
   macchina
   which
