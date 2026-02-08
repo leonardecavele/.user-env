@@ -40,9 +40,9 @@ if transparent_ok then
 	  bg = "NONE"
 	})
 
-	vim.api.nvim_set_hl(0, "ColorColumn", {
-	  bg = "#3b1414"
-	})
-
 	keymap("n", " tt", "<cmd>TransparentToggle<cr>", { desc = "Toogle Nvim Transparency" })
+
+	vim.api.nvim_set_hl(0, "ColorColumn", {
+	  bg = "#fc8181"
+	})
 end

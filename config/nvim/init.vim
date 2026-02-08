@@ -39,6 +39,7 @@ set undofile
 call plug#end()
 
 syntax on
+set belloff=all
 set number
 set colorcolumn=80
 set tabstop=4
