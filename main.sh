@@ -13,10 +13,9 @@ source "$SCRIPT_DIRECTORY/srcs/helper.sh"
 source "$SCRIPT_DIRECTORY/parameters.sh"
 
 # handle arguments
-if [ "${1-}" != "-s" ] && [ "${1-}" != "-u" ] && [ "${1-}" != "-r" ]; then
-  log_error "invalid argument. usage:"
-  log_error "./main.sh -s [SET-UP | UPDATE] | -r [REMOVE JUNEST] | -u [UNINSTALL PACKAGES]"
-  exit 1
+if [[ "${1-}" == "-h" || ( "${1-}" != "-s" && "${1-}" != "-u" && "${1-}" != "-r" ) ]]; then
+  display_args
+  exit 0
 fi
 
 if [ "${1-}" = "-r" ] || [ "${1-}" = "-u" ]; then
