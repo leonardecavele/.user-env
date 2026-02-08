@@ -47,7 +47,7 @@ cat() {
 # prompt
 shopt -s checkwinsize
 
-PS1="[${PROMPT_RED}\$?${PROMPT_RESET}] ${PROMPT_GREEN}\u@\h ${PROMPT_BLUE}\W${PROMPT_MAGENTA} \$(git_branch)\n${PROMPT_RESET}\$ "
+PS1="[\$?] ${PROMPT_GREEN}\u@\h ${PROMPT_BLUE}\W${PROMPT_MAGENTA} \$(git_branch)\n${PROMPT_RESET}\$ "
 
 # macchina
 TMP_DIRECTORY="${XDG_RUNTIME_DIR:-/tmp}"

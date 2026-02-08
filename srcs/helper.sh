@@ -13,6 +13,9 @@ PROMPT_RESET='\[\e[0m\]'
 PROMPT_BLUE='\[\033[01;34m\]'
 PROMPT_GREEN='\[\033[01;32m\]'
 PROMPT_MAGENTA='\[\033[01;91m\]'
+PROMPT_YELLOW='\[\033[01;33m\]'
+PROMPT_RED='\[\033[01;91m\]'
+PROMPT_LIGHT_BLUE='\[\033[01;94m\]'
 
 junest_installed() {
   if [ -d "$JUNEST_REPOSITORY" ]; then
