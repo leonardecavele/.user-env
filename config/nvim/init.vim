@@ -26,7 +26,7 @@ Plug 'nvim-mini/mini.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " appearance
-Plug 'folke/tokyonight.nvim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'xiyaowong/transparent.nvim'
 Plug 'rachartier/tiny-glimmer.nvim'
 

@@ -1,12 +1,17 @@
--- https://github.com/folke/tokyonight.nvim
-local tokyonight_ok, tokyonight = pcall(require, "tokyonight")
-if tokyonight_ok then
-    tokyonight.setup({
-		transparent = true,
-		style = "moon",
-	})
+-- https://github.com/catppuccin/nvim
+local catppuccin_ok, catppuccin = pcall(require, "catppuccin")
+if catppuccin_ok then
+    vim.o.background = "light"
 
-	vim.cmd("colorscheme tokyonight")
+    catppuccin.setup({
+        flavour = "auto", -- latte, frappe, macchiato, mocha, auto
+        background = {
+            light = "latte",
+        },
+        transparent_background = true,
+    })
+
+    vim.cmd("colorscheme catppuccin")
 end
 
 -- https://github.com/xiyaowong/transparent.nvim
