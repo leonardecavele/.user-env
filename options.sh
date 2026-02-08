@@ -30,6 +30,7 @@ pkgs=(
   tar
   gzip
   wget
+  pygmentize
 )
 
 # npm package list
