@@ -30,6 +30,12 @@ Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'xiyaowong/transparent.nvim'
 Plug 'rachartier/tiny-glimmer.nvim'
 
+" temp files in linux home
+set directory^=$HOME/.vim/swap//
+set backupdir^=$HOME/.vim/backup//
+set undodir^=$HOME/.vim/undo//
+set undofile
+
 call plug#end()
 
 syntax on
@@ -48,7 +54,7 @@ set undodir=~/.local/share/nvim/undo/
 set undolevels=99
 
 source ~/.config/nvim/vim/stdheader.vim
-source ~/.config/nvim/config.lua
+luafile ~/.config/nvim/config.lua
 
 let g:user42 = 'ldecavel'
 let g:mail42 = 'ldecavel@student.42lyon.fr'

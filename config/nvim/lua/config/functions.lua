@@ -13,10 +13,15 @@ function get_python_path()
 
 	local cwd = vim.fn.getcwd()
 
-	local is_python_project = vim.fn.glob(cwd .. "/**/*.py") ~= "" 
-        or vim.fn.filereadable(cwd .. "/pyproject.toml") == 1 
-        or vim.fn.filereadable(cwd .. "/requirements.txt") == 1
-        or vim.fn.filereadable(cwd .. "/poetry.lock") == 1
+	local buf = vim.api.nvim_get_current_buf()
+	local name = vim.api.nvim_buf_get_name(buf)
+	local is_python_file = name:match("%.py$") ~= nil
+
+	local is_python_project =
+		is_python_file
+		or vim.fn.filereadable(cwd .. "/pyproject.toml") == 1
+		or vim.fn.filereadable(cwd .. "/requirements.txt") == 1
+		or vim.fn.filereadable(cwd .. "/poetry.lock") == 1
 
     if not is_python_project then
         return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python3"

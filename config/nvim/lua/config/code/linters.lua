@@ -42,10 +42,8 @@ vim.diagnostic.config({
 
 vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#ff5555" })
 vim.api.nvim_set_hl(0, "DiagnosticWarn",  { fg = "#ff5555" })
--- vim.api.nvim_set_hl(0, "DiagnosticWarn",  { fg = "#f1fa8c" })
 
 vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#ff6c6b" })
 vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn",  { fg = "#ff6c6b" })
---vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn",  { fg = "#ECBE7B" })
 
 keymap("n", "<C-p>", vim.diagnostic.open_float, { desc = "Open diagnostic float window" })

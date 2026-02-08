@@ -7,6 +7,9 @@ pkgs=(
   less
   flake8
   mypy
+  xclip
+  wl-clipboard
+  xsel
   base-devel
   man-pages
   libxcb
