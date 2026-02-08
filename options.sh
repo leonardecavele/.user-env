@@ -1,4 +1,4 @@
-export user="leona"
+user="leona"
 
 # pacman package list
 pkgs=(
