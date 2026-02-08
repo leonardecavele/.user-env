@@ -54,11 +54,11 @@ export_in_bashrc() {
 }
 
 log_info() {
-  printf '%b|INFO%b %s %b]%b\n' "$YELLOW" "$RESET" "$1" "$YELLOW" "$RESET";
+  printf '%b|INFO%b %s\n' "$YELLOW" "$RESET" "$1";
 }
 
 log_error()  {
-  printf '%b|ERROR%b %s %b]%b\n' "$RED" "$RESET" "$1" "$RED" "$RESET" >&2;
+  printf '%b|ERROR%b %s\n' "$RED" "$RESET" "$1" >&2;
 }
 
 usage() {
