@@ -14,7 +14,7 @@ source "$SCRIPT_DIRECTORY/parameters.sh"
 
 # handle arguments
 if [[ "${1-}" == "-h" || ( "${1-}" != "-s" && "${1-}" != "-u" && "${1-}" != "-r" ) ]]; then
-  display_args
+  usage
   exit 0
 fi
 

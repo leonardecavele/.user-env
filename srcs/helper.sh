@@ -59,9 +59,19 @@ log_error()  {
   printf '%b|ERROR%b %s %b]%b\n' "$RED" "$RESET" "$1" "$RED" "$RESET" >&2;
 }
 
-display_args() {
-  echo "usage: ./main.sh -r|u|s"
-  echo "-s : set-up junest if pacman/sudo are not available, then install/update your packages"
-  echo "-r : remove junest and its packages"
-  echo "-u : uninstall downloaded packages"
+usage() {
+  cat <<'EOF'
+Usage: main.sh [OPTION]
+
+Options:
+  -s    Set up JuNest (if needed) and install/update packages
+  -u    Uninstall downloaded packages
+  -r    Remove JuNest and its packages
+  -h    Show this help and exit
+
+Examples:
+  main.sh -s
+  main.sh -u
+  main.sh -r
+EOF
 }
