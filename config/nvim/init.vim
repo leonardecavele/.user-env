@@ -10,7 +10,7 @@ Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 Plug 'mfussenegger/nvim-lint'
 Plug 'rmagatti/logger.nvim'
 Plug 'rmagatti/goto-preview'
-"Plug 'camAtGitHub/pydochide.nvim'
+Plug 'camAtGitHub/pydochide.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " code -> lsp
