@@ -57,6 +57,10 @@ if you edit any other file. You might want to edit ``.gitconfig`` as well.
 - `C-f`  Open preview window of the definition
 - `A-f`  Close all opened preview windows
 
+#### Neovim (Nvim Mini)
+
+- `\tc`  Toggle completion
+
 #### Tmux
 
 - `C-Space h`  Move to left pane  
