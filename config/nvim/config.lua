@@ -1,21 +1,21 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require('config.functions')
-require('config.keymaps')
+require('functions')
+require('keymaps')
 
 -- Navigation
-require('config.navigation.telescope')
+require('navigation.telescope')
 
 -- Code
-require('config.code.package-manager')
-require('config.code.treesitter')
-require('config.code.lsp')
-require('config.code.linters')
-require('config.code.goto-preview')
-require('config.code.docstring')
-require('config.code.completion')
+require('code.package-manager')
+require('code.treesitter')
+require('code.lsp')
+require('code.linters')
+require('code.goto-preview')
+require('code.docstring')
+require('code.completion')
 
 -- Appearance
-require('config.appearance.theme')
-require('config.appearance.animations')
+require('appearance.theme')
+require('appearance.animations')
