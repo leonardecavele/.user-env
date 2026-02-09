@@ -78,3 +78,8 @@ Examples:
   main.sh -r
 EOF
 }
+
+in_tmux() {
+  [ -n "${TMUX:-}" ] || [ "${TERM:-}" = "screen" ] || [ "${TERM:-}" = "screen-256color" ] \
+    || [ "${TERM:-}" = "tmux" ] || [ "${TERM:-}" = "tmux-256color" ]
+}
