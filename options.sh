@@ -10,6 +10,7 @@ pkgs=(
   tmux
   less
   flake8
+  rust
   mypy
   xclip
   wl-clipboard
@@ -43,6 +44,9 @@ pkgs=(
 # npm package list
 npms=(
   pyright
+)
+
+cargos=(
 )
 
 # binded directories
