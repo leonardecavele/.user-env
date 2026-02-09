@@ -1,6 +1,9 @@
 # username
 user="leona"
 
+# npm directory
+npm_directory="$HOME/npm-global"
+
 # pacman package list
 pkgs=(
   neovim
