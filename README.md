@@ -41,3 +41,21 @@ if you edit any other file.
     ├── junest.sh       # JuNest management logic
     └── packages.sh     # Package installation logic
 ```
+
+### BINDINGS
+
+#### Neovim (Telescope)
+
+- `Space ff`  Find files in the project  
+- `Space fg`  Live grep across the whole project  
+- `Space fb`  List opened buffers  
+- `Space fh`  Search Neovim help tags  
+
+#### tmux
+
+- `C-Space h`  Move to left pane  
+- `C-Space j`  Move to bottom pane  
+- `C-Space k`  Move to top pane  
+- `C-Space l`  Move to right pane  
+- `C-Space p`      Switch to previous pane  
+- `C-Space Space`  Change pane layout
