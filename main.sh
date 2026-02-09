@@ -45,13 +45,15 @@ export_in_bashrc "JUNEST_REPOSITORY" "$JUNEST_REPOSITORY"
 export_in_bashrc "JUNEST" "$JUNEST"
 
 # populate locale for perl
-log_info "populating locale"
-sudo locale-gen
-sudo sed -i \
-  's/^[[:space:]]*#[[:space:]]*\(en_US\.UTF-8[[:space:]]\+UTF-8\)/\1/' \
-  /etc/locale.gen
-echo 'LANG=en_US.UTF-8' | sudo tee /etc/locale.conf >/dev/null
-log_info "done populating locale"
+if sudo_pacman_available; then
+  log_info "populating locale"
+  sudo locale-gen
+  sudo sed -i \
+    's/^[[:space:]]*#[[:space:]]*\(en_US\.UTF-8[[:space:]]\+UTF-8\)/\1/' \
+    /etc/locale.gen
+  echo 'LANG=en_US.UTF-8' | sudo tee /etc/locale.conf >/dev/null
+  log_info "done populating locale"
+endif
 
 # install
 if sudo_pacman_available; then
