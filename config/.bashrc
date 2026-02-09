@@ -24,7 +24,7 @@ if ! in_arch && junest_installed; then
 fi
 
 # aliases
-alias al-env='$SCRIPT_DIRECTORY/main.sh'
+alias ale='$SCRIPT_DIRECTORY/main.sh'
 alias options='vim $SCRIPT_DIRECTORY/options.sh'
 alias ra='rm a.out'
 alias c='cc -Wall -Wextra -Werror'
