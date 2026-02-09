@@ -38,13 +38,6 @@ sudo_pacman_available() {
   return 1
 }
 
-exit_junest() {
-  printf -v VAR '%q' 0
-  if ! grep -qE '^EXIT_JUNEST=' "$SCRIPT_DIRECTORY/config/.bashrc"; then
-    sed -i "/^# variables$/a EXIT_JUNEST=$VAR" "$SCRIPT_DIRECTORY/config/.bashrc"
-  fi
-}
-
 git_branch() {
   branch=$(git symbolic-ref --short HEAD 2>/dev/null)
   if [ -n "$branch" ]; then

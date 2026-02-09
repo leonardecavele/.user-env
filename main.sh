@@ -20,9 +20,9 @@ fi
 
 if [ "${1-}" = "-r" ] || [ "${1-}" = "-u" ]; then
   if [ "${1-}" = "-r" ] && in_arch && junest_installed; then
-	exit_junest
+	  export_in_bashrc "EXIT_JUNEST" "0"
     log_info "please restart your terminal"
-    exit 1
+    exit 0
   fi
   perl -0777 -i -pe 's/^# variables[ \t]*\R.*?(?=^#)/# variables\n\n/sm' \
 	  "$SCRIPT_DIRECTORY/config/.bashrc"
