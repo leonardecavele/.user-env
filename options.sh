@@ -2,7 +2,7 @@
 user="leona"
 
 # npm directory
-npm_directory="$HOME/npm-global"
+npm_directory="$HOME/.npm-global"
 
 # pacman package list
 pkgs=(
