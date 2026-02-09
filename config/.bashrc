@@ -59,6 +59,9 @@ fi
 
 # macchina
 TMP_DIRECTORY="${XDG_RUNTIME_DIR:-/tmp}"
+if [ ! -d "$TMP_DIRECTORY" ]; then
+  TMP_DIRECTORY="/tmp"
+fi
 MACCHINA_SHOWN="$TMP_DIRECTORY/macchina.$$"
 if in_arch && [ ! -e "$MACCHINA_SHOWN" ]; then
   : > "$MACCHINA_SHOWN"
