@@ -1,5 +1,11 @@
 # variables
 
+# WSLg: Wayland socket location
+if [ -S /mnt/wslg/runtime-dir/wayland-0 ]; then
+  export XDG_RUNTIME_DIR=/mnt/wslg/runtime-dir
+  export WAYLAND_DISPLAY=wayland-0
+fi
+
 # get helper and options
 source "$SCRIPT_DIRECTORY/srcs/helper.sh"
 source "$SCRIPT_DIRECTORY/options.sh"
@@ -58,11 +64,7 @@ if ! in_tmux && in_arch; then
 fi
 
 # macchina
-TMP_DIRECTORY="${XDG_RUNTIME_DIR:-/tmp}"
-if [ ! -d "$TMP_DIRECTORY" ]; then
-  TMP_DIRECTORY="/tmp"
-fi
-MACCHINA_SHOWN="$TMP_DIRECTORY/macchina.$$"
+MACCHINA_SHOWN="/tmp/macchina.$$"
 if in_arch && [ ! -e "$MACCHINA_SHOWN" ]; then
   : > "$MACCHINA_SHOWN"
   macchina --config ~/.config/macchina/macchina.toml
