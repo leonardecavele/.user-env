@@ -27,6 +27,7 @@ if [ "${1-}" = "-r" ] || [ "${1-}" = "-u" ]; then
   perl -0777 -i -pe 's/^# variables[ \t]*\R.*?(?=^#)/# variables\n\n/sm' \
 	  "$SCRIPT_DIRECTORY/config/.bashrc"
   rm -f $HOME/.config/macchina $HOME/.config/nvim $HOME/.bashrc $HOME/.tmux.conf
+  rm -rf $HOME/.local/share/nvim
   log_info "config successfully uninstalled"
   if [ "${1-}" = "-r" ]; then
     rm -rf -- "$JUNEST_REPOSITORY" "$HOME/.junest"
