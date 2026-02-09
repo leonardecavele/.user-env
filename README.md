@@ -51,11 +51,16 @@ if you edit any other file.
 - `Space fb`  List opened buffers  
 - `Space fh`  Search Neovim help tags  
 
+#### Neovim (Goto preview)
+
+- `C-f`  Open preview window of the definition
+- `A-f`  Close all opened preview windows
+
 #### tmux
 
 - `C-Space h`  Move to left pane  
 - `C-Space j`  Move to bottom pane  
 - `C-Space k`  Move to top pane  
 - `C-Space l`  Move to right pane  
-- `C-Space p`      Switch to previous pane  
+- `C-Space p`  Switch to previous pane  
 - `C-Space Space`  Change pane layout
