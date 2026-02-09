@@ -60,6 +60,10 @@ if you edit any other file. You might want to edit ``.gitconfig`` as well.
 #### Neovim (Nvim Mini)
 
 - `\tc`  Toggle completion
+- 'C-n`  Next
+- `C-p`  Previous
+- `C-y`  Validate
+- `C-e`  Cancel
 
 #### Tmux
 
