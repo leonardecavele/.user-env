@@ -45,6 +45,9 @@ if you edit any other file. You might want to edit ``.gitconfig`` as well.
 
 ### BINDINGS
 
+#### Junest
+- `sudoj`  Junest sudo 
+
 #### Neovim (Telescope)
 
 - `Space ff`  Find files in the project  
