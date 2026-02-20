@@ -3,11 +3,18 @@
 # strict with errors
 set -euo pipefail
 
-export SCRIPT_DIRECTORY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-export_in_bashrc "SCRIPT_DIRECTORY" "$SCRIPT_DIRECTORY"
-
 # sources
+export SCRIPT_DIRECTORY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+export JUNEST_REPOSITORY="$SCRIPT_DIRECTORY/junest"
+export JUNEST="${JUNEST:-$JUNEST_REPOSITORY/bin/junest}"
+
+source "$SCRIPT_DIRECTORY/packages.sh"
+source "$SCRIPT_DIRECTORY/srcs/colors.sh"
 source "$SCRIPT_DIRECTORY/srcs/utils.sh"
+
+export_in_bashrc "SCRIPT_DIRECTORY" "$SCRIPT_DIRECTORY"
+export_in_bashrc "JUNEST_REPOSITORY" "$JUNEST_REPOSITORY"
+export_in_bashrc "JUNEST" "$JUNEST"
 
 # check arguments validity
 if [[ "${1-}" == "-h" || ( "${1-}" != "-i" && "${1-}" != "-u" && "${1-}" != "-d" ) ]]; then
@@ -16,7 +23,7 @@ if [[ "${1-}" == "-h" || ( "${1-}" != "-i" && "${1-}" != "-u" && "${1-}" != "-d"
 fi
 
 # delete
-if [ "${1-}" = "-r" ]; then
+if [ "${1-}" = "-d" ]; then
 
   log_info "$0" "deleting config"
 
@@ -24,16 +31,20 @@ if [ "${1-}" = "-r" ]; then
   source "$SCRIPT_DIRECTORY/srcs/packages/delete_packages.sh"
 
   # deleting .config directories
-  for dir in "$SCRIPT_DIRECTORY/config"/*/; do
-    rm -rf "$dir"
+  for src_dir in "$SCRIPT_DIRECTORY/config"/*/; do
+    [ -d "$src_dir" ] || continue
+    name="$(basename "$src_dir")"
+    rm -rf -- "$HOME/.config/$name"
   done
   # deleting dotfiles
-  for path in "$SCRIPT_DIRECTORY/config"/.[!.]* "$SCRIPT_DIRECTORY/config"/..?*; do
-	rm -f "$path"
+  for src_path in "$SCRIPT_DIRECTORY/config"/.[!.]* "$SCRIPT_DIRECTORY/config"/..?*; do
+    [ -e "$src_path" ] || continue
+    name="$(basename "$src_path")"
+    rm -f -- "$HOME/$name"
   done
 
   # deleting config remaining files
-  rm -rf $HOME/.local/share/nvim
+  rm -rf "$HOME/.local/share/nvim"
 
   # deleting junest
   if is_junest; then
@@ -66,15 +77,8 @@ else
   source "$SCRIPT_DIRECTORY/srcs/install_junest.sh"
   source "$SCRIPT_DIRECTORY/srcs/packages/install_packages.sh"
 
-  export JUNEST_REPOSITORY="$SCRIPT_DIRECTORY/junest"
-  export_in_bashrc "JUNEST_REPOSITORY" "$JUNEST_REPOSITORY"
-  
-  export JUNEST="${JUNEST:-$JUNEST_REPOSITORY/bin/junest}"
-  export_in_bashrc "JUNEST" "$JUNEST"
-
   log_info "$0" "packages successfully installed on junest"
 fi
-
 
 # link .config directories
 mkdir -p "$HOME/.config"

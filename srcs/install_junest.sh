@@ -1,5 +1,5 @@
 # clone junest repository
-if ! has_junest_repo; then
+if ! has_junest_repository; then
   git clone https://github.com/leonardecavele/junest.git "$JUNEST_REPOSITORY"
 else
   log_info "junest already cloned in: ${JUNEST_REPOSITORY}"

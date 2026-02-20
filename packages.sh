@@ -79,6 +79,8 @@ npm_pkgs=(
   pyright
 )
 
+npm_directory=$HOME/.npm-global
+
 # cargo package list
 cargo_pkgs=(
 )

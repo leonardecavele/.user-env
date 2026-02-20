@@ -3,6 +3,7 @@ if is_junest; then
   RUN=()
 else
   RUN=("$JUNEST" -n)
+fi
 
 if [ "${1-}" = "-i" ] ; then
   # install pacman packages
@@ -26,7 +27,7 @@ elif [ "${1-}" = "-d" ] ; then
   log_info "$0" "deleting pacman packages"
 
   for pkg in "${pacman_pkgs[@]}"; do
-    if "${RUN[@]}" pacman -Qq "$p" >/dev/null 2>&1; then
+    if "${RUN[@]}" pacman -Qq "$pkg" >/dev/null 2>&1; then
       if ! "${RUN[@]}" sudo pacman -Rns --noconfirm "$pkg" </dev/null; then
         log_info "$0" "skipped (blocked by deps?): $pkg"
       fi

@@ -1,5 +1,5 @@
 is_junest() {
-  if command -v junest >/dev/null 2>&1 \
+  command -v junest >/dev/null 2>&1 \
   && junest --version >/dev/null 2>&1
 }
 
@@ -19,16 +19,24 @@ is_sudo() {
   /usr/bin/sudo -n true >/dev/null 2>&1
 }
 
+is_npm() {
+  command -v npm >/dev/null 2>&1
+}
+
+is_cargo() {
+  command -v cargo >/dev/null 2>&1
+}
+
 has_junest_repository() {
   [ -d "$JUNEST_REPOSITORY" ]
 }
 
 export_in_bashrc() {
-  [ -n "$1" ] && [ -n "$2" ] || return 1
+  [ -n "${1-}" ] && [ -n "${2-}" ] || return 1
 
-  printf -v VAR '%q' "$2"
-  if ! grep -qE "^export ${1}=" "$SCRIPT_DIRECTORY/config/.bashrc"; then
-    sed -i "/^# exports$/a export ${1}=${VAR}" "$SCRIPT_DIRECTORY/config/.bashrc"
+  printf -v VAR '%q' "${2-}"
+  if ! grep -qE "^export ${1-}=" "$SCRIPT_DIRECTORY/config/.bashrc"; then
+    sed -i "/^# exports$/a export ${1-}=${VAR}" "$SCRIPT_DIRECTORY/config/.bashrc"
   fi
 }
 
@@ -37,11 +45,11 @@ clean_bashrc_exports() {
 }
 
 log_info() {
-  printf '%b[%s]: (info)%b %s\n' "$YELLOW" "$1" "$RESET" "$2";
+  printf '%b[%s]: (info)%b %s\n' "$YELLOW" "${1-}" "$RESET" "${2-}";
 }
 
 log_error()  {
-  printf '%b[%s]: (error)%b %s\n' "$RED" "$1" "$RESET" "$2";
+  printf '%b[%s]: (error)%b %s\n' "$RED" "${1-}" "$RESET" "${2-}";
 }
 
 usage() {

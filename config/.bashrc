@@ -1,4 +1,7 @@
 # exports
+export JUNEST=/home/leona/.user-env/junest/bin/junest
+export JUNEST_REPOSITORY=/home/leona/.user-env/junest
+export SCRIPT_DIRECTORY=/home/leona/.archlinux-env
 
 # stop if not interactive
 case $- in
@@ -11,6 +14,7 @@ esac
 source "$SCRIPT_DIRECTORY/packages.sh"
 source "$SCRIPT_DIRECTORY/srcs/helper.sh"
 source "$SCRIPT_DIRECTORY/srcs/custom_commands.sh"
+source "$SCRIPT_DIRECTORY/srcs/colors.sh"
 
 # junest
 export PATH="$HOME/.local/share/junest/bin:$PATH"
