@@ -16,10 +16,15 @@ export_in_bashrc "SCRIPT_DIRECTORY" "$SCRIPT_DIRECTORY"
 export_in_bashrc "JUNEST_REPOSITORY" "$JUNEST_REPOSITORY"
 export_in_bashrc "JUNEST" "$JUNEST"
 
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  log_error "$0" "this script must be sourced not executed"
+  exit 1
+fi
+
 # check arguments validity
 if [[ "${1-}" == "-h" || ( "${1-}" != "-i" && "${1-}" != "-u" && "${1-}" != "-d" ) ]]; then
   usage
-  exit 1
+  return 1
 fi
 
 # delete
@@ -27,11 +32,11 @@ if [ "${1-}" = "-d" ]; then
 
   log_info "$0" "deleting config"
 
-  # delete packages
-  source "$SCRIPT_DIRECTORY/srcs/packages/delete_packages.sh"
-
   # remove exports of bashrc
   clean_bashrc_exports
+
+  # delete packages
+  source "$SCRIPT_DIRECTORY/srcs/packages/delete_packages.sh"
 
   # deleting .config directories
   for src_dir in "$SCRIPT_DIRECTORY/config"/*/; do

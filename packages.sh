@@ -32,7 +32,6 @@ pacman_pkgs=(
   mesa
   rust
   vulkan-swrast
-  neovim
   tree-sitter-cli
   python-pip
   pygmentize

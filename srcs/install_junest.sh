@@ -6,9 +6,9 @@ else
 fi
 
 # check if junest is installed
-if [ -f "$HOME/.junest" ] ; then
+if [ -d "$HOME/.junest" ] ; then
   log_info "$0" "junest already installed"
-  exit 0
+  return 0
 fi
 
 # install junest
