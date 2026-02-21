@@ -16,7 +16,6 @@ is_apt() {
 }
 
 is_sudo() {
-  return 1
   /usr/bin/sudo -n true >/dev/null 2>&1
 }
 

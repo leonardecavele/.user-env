@@ -27,7 +27,7 @@ export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.local/bin"
 
 # aliases
-alias ue='$SCRIPT_DIRECTORY/install_config.sh'
+alias ue='source $SCRIPT_DIRECTORY/install_config.sh'
 alias ra='rm a.out'
 alias c='cc -Wall -Wextra -Werror'
 alias n='norminette -R CheckForbiddenSourceHeader'
@@ -41,11 +41,11 @@ shopt -s checkwinsize
 
 PS1="[\$?] ${PROMPT_GREEN}\u@\h ${PROMPT_BLUE}\W${PROMPT_MAGENTA} \$(git_branch)\n${PROMPT_RESET}\$ "
 
-# auto-tmux (only if real terminal)
-if ! in_tmux; then
-  tmux has-session -t main 2>/dev/null && tmux kill-session -t main
-  exec tmux new-session -s main
-fi
+## auto-tmux (only if real terminal)
+#if ! in_tmux; then
+#  tmux has-session -t main 2>/dev/null && tmux kill-session -t main
+#  exec tmux new-session -s main
+#fi
 
 # macchina
 macchina --config ~/.config/macchina/macchina.toml
