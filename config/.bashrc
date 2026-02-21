@@ -1,8 +1,4 @@
 # exports
-export JUNEST=/home/leona/.user-env/junest/bin/junest
-export JUNEST_REPOSITORY=/home/leona/.user-env/junest
-export SCRIPT_DIRECTORY=/home/leona/.user-env
-SCRIPT_DIRECTORY=$HOME/.user-env
 
 # stop if not interactive
 case $- in
@@ -26,6 +22,9 @@ fi
 
 # cargo
 export PATH="$PATH:$HOME/.cargo/bin"
+
+# nvim
+export PATH="$PATH:$HOME/.local/bin"
 
 # aliases
 alias user_env='$SCRIPT_DIRECTORY/install_config.sh'

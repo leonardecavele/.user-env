@@ -1,7 +1,7 @@
-SNAP_DIR="$SCRIPT_DIRECTORY/snapshot"
-SNAP_BASE="$SNAP_DIR/pacman_base.snapshot"
-SNAP_CUR="$SNAP_DIR/pacman_cur.snapshot"
-SNAP_DIFF="$SNAP_DIR/pacman_diff.snapshot"
+SNAP_DIR="$SCRIPT_DIRECTORY/snapshots"
+SNAP_BASE="$SNAP_DIR/pacman_before.snp"
+SNAP_CUR="$SNAP_DIR/pacman_now.snp"
+SNAP_DIFF="$SNAP_DIR/pacman_diff.snp"
 
 # detect junest
 if is_junest; then
@@ -34,7 +34,7 @@ elif [ "${1-}" = "-d" ] ; then
   log_info "$0" "deleting pacman packages"
 
   if [ ! -f "$SNAP_BASE" ]; then
-    log_error "$0" "snapshot missing: $SNAP_BASE"
+    log_error "$0" "snapshots missing: $SNAP_BASE"
     exit 1
   fi
 
