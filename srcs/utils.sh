@@ -16,7 +16,8 @@ is_apt() {
 }
 
 is_sudo() {
-  /usr/bin/sudo -n true >/dev/null 2>&1
+  command -v sudo >/dev/null 2>&1 || return 1
+  sudo -v >/dev/null 2>&1
 }
 
 is_npm() {
