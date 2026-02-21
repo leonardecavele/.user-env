@@ -21,15 +21,15 @@ is_sudo() {
 }
 
 is_npm() {
-  command -v npm >/dev/null 2>&1
+  "$@" command -v npm >/dev/null 2>&1
 }
 
 is_nvim() {
-    command -v nvim >/dev/null 2>&1
+  command -v nvim >/dev/null 2>&1
 }
 
 is_cargo() {
-  command -v cargo >/dev/null 2>&1
+  "$@" command -v cargo >/dev/null 2>&1
 }
 
 has_junest_repository() {
@@ -46,7 +46,7 @@ export_in_bashrc() {
 }
 
 clean_bashrc_exports() {
-  perl -0777 -i -pe 's/^# exports[ \t]*\R.*?(?=^#)/# exports\n\n/sm'
+  perl -0777 -i -pe 's/^# exports[ \t]*\R.*?(?=^#)/# exports\n\n/sm' "$HOME/.bashrc"
 }
 
 log_info() {

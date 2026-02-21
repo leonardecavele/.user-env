@@ -8,7 +8,7 @@ fi
 # delete cargo packages
 log_info "$0" "deleting cargo packages"
 
-if is_cargo; then
+if is_cargo "${RUN[@]}"; then
   for pkg in "${cargo_pkgs[@]}"; do
     "${RUN[@]}" cargo uninstall "$pkg" >/dev/null 2>&1 || true
   done
@@ -20,8 +20,8 @@ fi
 # delete npm packages
 log_info "$0" "deleting npm packages"
 
-if is_npm; then
-  npm config set prefix "$npm_directory"
+if is_npm "${RUN[@]}"; then
+  "${RUN[@]}" npm config set prefix "$npm_directory"
   "${RUN[@]}" sudo npm uninstall -g "${npm_pkgs[@]}"
   log_info "$0" "successfully deleted npm packages"
 else

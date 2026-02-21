@@ -30,6 +30,9 @@ if [ "${1-}" = "-d" ]; then
   # delete packages
   source "$SCRIPT_DIRECTORY/srcs/packages/delete_packages.sh"
 
+  # remove exports of bashrc
+  clean_bashrc_exports
+
   # deleting .config directories
   for src_dir in "$SCRIPT_DIRECTORY/config"/*/; do
     [ -d "$src_dir" ] || continue
@@ -42,9 +45,6 @@ if [ "${1-}" = "-d" ]; then
     name="$(basename "$src_path")"
     rm -f -- "$HOME/$name"
   done
-
-  # remove exports of bashrc
-  clean_bashrc_exports
 
   # deleting config remaining files
   rm -rf "$HOME/.local/share/nvim"

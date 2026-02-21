@@ -5,9 +5,9 @@ SNAP_DIFF="$SNAP_DIR/pacman_diff.snp"
 
 # detect junest
 if is_junest; then
-  RUN=()
-else
   RUN=("$JUNEST" -n)
+else
+  RUN=()
 fi
 
 if [ "${1-}" = "-i" ] ; then
@@ -15,7 +15,9 @@ if [ "${1-}" = "-i" ] ; then
 
   mkdir -p "$SNAP_DIR"
 
-  "${RUN[@]}" pacman -Qqe | sort -u > "$SNAP_BASE"
+  if ! is_junest; then
+    "${RUN[@]}" pacman -Qqe | sort -u > "$SNAP_BASE"
+  fi
 
   "${RUN[@]}" sudo pacman -Syu --noconfirm
   "${RUN[@]}" sudo pacman -S --noconfirm --needed "${pacman_pkgs[@]}"
@@ -30,7 +32,7 @@ elif [ "${1-}" = "-u" ] ; then
 
   log_info "$0" "successfully updated pacman packages"
 
-elif [ "${1-}" = "-d" ] ; then
+elif [ "${1-}" = "-d" ] && ! is_junest ; then
   log_info "$0" "deleting pacman packages"
 
   if [ ! -f "$SNAP_BASE" ]; then
