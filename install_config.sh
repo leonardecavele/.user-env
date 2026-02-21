@@ -32,6 +32,9 @@ if [ "${1-}" = "-d" ]; then
   # remove exports of bashrc
   clean_bashrc_exports
 
+  # delete fonts
+  source "$SCRIPT_DIRECTORY/srcs/fonts/delete_fonts"
+
   # delete packages
   source "$SCRIPT_DIRECTORY/srcs/packages/delete_packages.sh"
 
@@ -56,11 +59,15 @@ if [ "${1-}" = "-d" ]; then
     rm -rf -- "$JUNEST_REPOSITORY" "$HOME/.junest"
   fi
 
+  # delete fonts
+  source "$SCRIPT_DIRECTORY/srcs/fonts/delete_fonts.sh"
+
   log_info "$0" "config successfully deleted"
 
   reload_shell
 fi
 
+# update
 if [ "${1-}" = "-u" ]; then
 	
 	log_info "$0" "updating packages"
@@ -68,6 +75,8 @@ if [ "${1-}" = "-u" ]; then
 	source "$SCRIPT_DIRECTORY/srcs/packages/update_packages.sh" -u
 
 	log_info "$0" "packages successfully updated"
+
+	source "$SCRIPT_DIRECTORY/srcs/fonts/install_fonts.sh"
 
 	reload_shell
 fi
@@ -104,5 +113,7 @@ else
 
   log_info "$0" "packages successfully installed on junest"
 fi
+
+source "$SCRIPT_DIRECTORY/srcs/fonts/install_fonts.sh"
 
 reload_shell
