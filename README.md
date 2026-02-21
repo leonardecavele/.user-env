@@ -44,3 +44,8 @@ Options:
 - `C-Space Space`  Change pane layout
 - `C-Space R`  Reload tmux
 - `C-Space z`  Single pane focus
+- `C-Space [`  Enter copy mode
+
+Copy mode:
+- `Space`  Start selection
+- `Enter`  Copy selection to buffer
