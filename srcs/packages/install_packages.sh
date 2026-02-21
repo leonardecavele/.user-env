@@ -55,12 +55,11 @@ log_info "$0" "successfully installed cargo packages"
 log_info "$0" "installing nvim"
 
 if ! is_nvim; then
-  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+  curl -Lo "$SCRIPT_DIRECTORY/nvim.appimage" https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
   chmod u+x nvim.appimage
-  ./nvim.appimage
   
   mkdir -p ~/.local/bin
-  mv nvim.appimage ~/.local/bin/nvim
+  mv nvim.appimage "$HOME/.local/bin/nvim"
 fi
 
 log_info "$0" "nvim successfully installed"
@@ -74,5 +73,6 @@ if [ ! -f "$plug_path" ]; then
   curl -sfLo "$plug_path" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim >/dev/null
 fi
+"$HOME/.local/bin/nvim" --headless +PlugInstall +PlugUpdate +qa
 
-log_info "$0" "vim plug succesfully installed (hint: ':PlugInstall')"
+log_info "$0" "vim plug succesfully installed"
