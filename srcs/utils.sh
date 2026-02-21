@@ -118,3 +118,8 @@ reload_shell() {
   log_info "$0" "reloading shell"
   exec bash -i
 }
+
+can_install_junest() {
+  command -v unshare >/dev/null 2>&1 || return 1
+  unshare -Ur true >/dev/null 2>&1
+}
