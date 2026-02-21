@@ -5,6 +5,15 @@ else
   RUN=()
 fi
 
+# detect package manager
+if ! is_sudo || is_pacman; then
+  source "$SCRIPT_DIRECTORY/srcs/packages/pacman.sh" -u
+elif is_dnf; then
+  source "$SCRIPT_DIRECTORY/srcs/packages/dnf.sh" -u
+elif is_apt; then
+  source "$SCRIPT_DIRECTORY/srcs/packages/apt.sh" -u
+fi
+
 # update cargo packages
 log_info "$0" "updating cargo packages"
 
@@ -27,13 +36,4 @@ if is_npm; then
   log_info "$0" "successfully updated npm packages"
 else
   log_info "$0" "can't find npm"
-fi
-
-# detect package manager
-if is_pacman; then
-  source "$SCRIPT_DIRECTORY/srcs/packages/pacman.sh" -u
-elif is_dnf; then
-  source "$SCRIPT_DIRECTORY/srcs/packages/dnf.sh" -u
-elif is_apt; then
-  source "$SCRIPT_DIRECTORY/srcs/packages/apt.sh" -u
 fi

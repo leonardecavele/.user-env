@@ -38,7 +38,7 @@ rm -f "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim"
 rm -rf "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/plugged"
 
 # detect package manager
-if is_pacman; then
+if ! is_sudo || is_pacman; then
   source "$SCRIPT_DIRECTORY/srcs/packages/pacman.sh" -d
 elif is_dnf; then
   source "$SCRIPT_DIRECTORY/srcs/packages/dnf.sh" -d
