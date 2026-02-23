@@ -20,3 +20,4 @@ require('code.completion')
 -- Appearance
 require('appearance.theme')
 require('appearance.animations')
+require('appearance.starter').setup()

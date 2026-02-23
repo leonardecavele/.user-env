@@ -30,6 +30,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'xiyaowong/transparent.nvim'
 Plug 'rachartier/tiny-glimmer.nvim'
+Plug 'nvimdev/dashboard-nvim'
 
 " game
 Plug 'eandrju/cellular-automaton.nvim'
