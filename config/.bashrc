@@ -8,19 +8,21 @@ source "$SCRIPT_DIRECTORY/srcs/colors.sh"
 
 # junest
 if is_junest; then
-  export PATH="$PATH:$SCRIPT_DIRECTORY/junest/bin"
+  export PATH="$SCRIPT_DIRECTORY/junest/bin:$PATH"
   export PATH="$PATH:$HOME/.junest/usr/bin_wrappers"
   export JUNEST_ARGS="$binded_dirs"
 fi
 
 # cargo
-export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # nvim
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
 
 # npm
-export PATH="$PATH:$HOME/.npm-global/bin"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
 
 # stop if not interactive
 case $- in
@@ -45,9 +47,9 @@ shopt -s checkwinsize
 PS1="[\$?] ${PROMPT_GREEN}\u@\h ${PROMPT_BLUE}\W${PROMPT_MAGENTA} \$(git_branch)\n${PROMPT_RESET}\$ "
 
 # tmux
-if ! in_tmux; then
-  exec tmux new-session -A -s main
-fi
+#if ! in_tmux; then
+#  exec tmux new-session -A -s main
+#fi
 
 # macchina
 macchina --config ~/.config/macchina/macchina.toml

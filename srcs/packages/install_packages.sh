@@ -1,8 +1,5 @@
-# detect junest
 if is_junest; then
-  RUN=("$JUNEST" -n)
-else
-  RUN=()
+  PATH="$PATH:$HOME/.junest/usr/bin_wrappers"
 fi
 
 # detect package manager
@@ -17,9 +14,16 @@ fi
 # install npm packages
 log_info "$0" "installing npm packages"
 
+export NVM_DIR="$HOME/.nvm"
+curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh" | bash
+source "$NVM_DIR/nvm.sh"
+
+nvm install node
+nvm use latest
+
 missing_npms=()
 for pkg in "${npm_pkgs[@]}"; do
-  if ! "${RUN[@]}" npm -g ls "$pkg" --depth=0 >/dev/null 2>&1; then
+  if ! npm -g ls "$pkg" --depth=0 >/dev/null 2>&1; then
     missing_npms+=("$pkg")
   fi
 done
@@ -27,11 +31,8 @@ done
 if [ "${#missing_npms[@]}" -eq 0 ]; then
   echo "nothing to do"
 else
-  mkdir -p "$npm_directory"
-  "${RUN[@]}" npm config set prefix "$npm_directory"
-  "${RUN[@]}" npm i -g --prefix "$npm_directory" --no-fund --no-audit "${missing_npms[@]}"
+  npm i -g --no-fund --no-audit "${missing_npms[@]}"
 fi
-
 PATH="$HOME/.npm-global/bin:$PATH"
 
 log_info "$0" "successfully installed npm packages"
@@ -41,14 +42,14 @@ log_info "$0" "installing cargo packages"
 
 missing_cargos=()
 for pkg in "${cargo_pkgs[@]}"; do
-  if ! "${RUN[@]}" command -v "$pkg" >/dev/null 2>&1; then
+  if ! command -v "$pkg" >/dev/null 2>&1; then
     missing_cargos+=("$pkg")
   fi
 done
 if [ "${#missing_cargos[@]}" -eq 0 ]; then
   echo "nothing to do"
 else
-  "${RUN[@]}" cargo install "${missing_cargos[@]}" --locked
+  cargo install "${missing_cargos[@]}" --locked
 fi
 
 log_info "$0" "successfully installed cargo packages"

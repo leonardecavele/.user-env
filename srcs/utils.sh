@@ -52,7 +52,6 @@ log_info() {
 }
 
 log_error() {
-  local name="${1-}"
   name="${name##*/}"
   printf '%bERROR%b %s: %s\n' "$RED" "$RESET" "$name"  "${2-}"
 }

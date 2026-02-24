@@ -1,10 +1,3 @@
-# detect junest
-if is_junest; then
-  RUN=("$JUNEST" -n)
-else
-  RUN=()
-fi
-
 # detect package manager
 if ! is_sudo || is_pacman; then
   source "$SCRIPT_DIRECTORY/srcs/packages/pacman.sh" -u
@@ -19,7 +12,7 @@ log_info "$0" "updating cargo packages"
 
 if is_cargo; then
   for pkg in "${cargo_pkgs[@]}"; do
-    "${RUN[@]}" cargo install-update -a >/dev/null 2>&1 || true
+    cargo install-update -a >/dev/null 2>&1 || true
     break
   done
   log_info "$0" "successfully updated cargo packages"
@@ -31,12 +24,13 @@ fi
 log_info "$0" "updating npm packages"
 
 if is_npm; then
-  npm config set prefix "$npm_directory"
-  "${RUN[@]}" sudo npm update -g "${npm_pkgs[@]}" >/dev/null 2>&1 || true
+  npm update -g "${npm_pkgs[@]}" >/dev/null 2>&1 || true
   log_info "$0" "successfully updated npm packages"
 else
   log_info "$0" "can't find npm"
 fi
+
+rm -rf $HOME/.nvm
 
 # update vim plug-ins
 "$HOME/.local/bin/nvim" --headless +'PlugInstall --sync' +qa >/dev/null 2>&1

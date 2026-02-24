@@ -13,7 +13,6 @@
 
 [merge]
     tool = nvimdiff
-    conflictstyle = zdiff3
 
 [mergetool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
