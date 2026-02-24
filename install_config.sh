@@ -33,7 +33,7 @@ if [ "${1-}" = "-d" ]; then
   clean_bashrc_exports
 
   # delete fonts
-  source "$SCRIPT_DIRECTORY/srcs/fonts/delete_fonts"
+  source "$SCRIPT_DIRECTORY/srcs/fonts/delete_fonts.sh"
 
   # delete packages
   source "$SCRIPT_DIRECTORY/srcs/packages/delete_packages.sh"
