@@ -77,7 +77,7 @@ git_branch() {
 }
 
 in_tmux() {
-  [ -z "$TMUX" ]
+  [ -n "${TMUX:-}" ]
 }
 
 can_delete_apt() {

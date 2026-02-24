@@ -1,5 +1,11 @@
 # exports
 
+# get helpers and options
+source "$SCRIPT_DIRECTORY/packages.sh"
+source "$SCRIPT_DIRECTORY/srcs/utils.sh"
+source "$SCRIPT_DIRECTORY/srcs/user_commands.sh"
+source "$SCRIPT_DIRECTORY/srcs/colors.sh"
+
 # junest
 if is_junest; then
   export PATH="$PATH:$SCRIPT_DIRECTORY/junest/bin"
@@ -23,12 +29,6 @@ case $- in
 esac
 [ -t 0 ] || return
 
-# get helpers and options
-source "$SCRIPT_DIRECTORY/packages.sh"
-source "$SCRIPT_DIRECTORY/srcs/utils.sh"
-source "$SCRIPT_DIRECTORY/srcs/user_commands.sh"
-source "$SCRIPT_DIRECTORY/srcs/colors.sh"
-
 # aliases
 alias ue='source $SCRIPT_DIRECTORY/install_config.sh'
 alias ra='rm a.out'
@@ -45,7 +45,7 @@ shopt -s checkwinsize
 PS1="[\$?] ${PROMPT_GREEN}\u@\h ${PROMPT_BLUE}\W${PROMPT_MAGENTA} \$(git_branch)\n${PROMPT_RESET}\$ "
 
 # tmux
-if in_tmux; then
+if ! in_tmux; then
   exec tmux new-session -A -s main
 fi
 
